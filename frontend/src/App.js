@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Landing from "./Landing";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { useCallback } from "react";
 import Profile from "./pages/Profile";
@@ -10,7 +9,6 @@ import Orders from "./pages/Orders";
 import AddFunds from "./pages/AddFunds";
 
 function App() {
-  const [showLanding, setShowLanding] = useState(true);
   const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -123,16 +121,6 @@ useEffect(() => {
     setToken(null);
     showToast("Logged out", "success");
   };
-
-  // LANDING
-  if (showLanding) {
-    return (
-      <>
-        <Landing onLoginClick={() => setShowLanding(false)} />
-        <Toast toast={toast} />
-      </>
-    );
-  }
 
   // LOGIN
   if (!token) {
@@ -294,14 +282,25 @@ useEffect(() => {
 
         {/* MAIN */}
         <div style={{ flex: 1, padding: 20 }}>
-          <Routes>
-          <Route path="/" element={<Order getUser={getUser} />} />
-            <Route path="/profile" element={<Profile logout={logout} user={user} />} />
-            <Route path="/order" element={<Order getUser={getUser} />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/addfunds" element={<AddFunds />} />
-          </Routes>
+<Routes>
+  {!token ? (
+    <>
+      {/* NOT LOGGED IN */}
+      <Route path="*" element={<Login setToken={setToken} />} />
+    </>
+  ) : (
+    <>
+      {/* LOGGED IN */}
+      <Route path="/" element={<Order getUser={getUser} />} />
+      <Route path="/order" element={<Order getUser={getUser} />} />
+      <Route path="/profile" element={<Profile logout={logout} user={user} />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/addfunds" element={<AddFunds />} />
+      <Route path="*" element={<Order getUser={getUser} />} />
+    </>
+  )}
+</Routes>
         </div>
 
       </div>
