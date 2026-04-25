@@ -10,7 +10,7 @@ function Order({ getUser }) {
   const [link, setLink] = useState("");
   const [quantity, setQuantity] = useState("");
   const [user, setUser] = useState(null);
-  const [orders, setOrders] = useState([]);
+  const [orders] = useState([]);
 
   // 🔹 Fetch services
   useEffect(() => {

@@ -101,9 +101,9 @@ function App() {
       console.error("Error fetching user:", err);
     }
   };
-  useEffect(() => {
-    if (token) getUser();
-  }, [token]);
+useEffect(() => {
+  if (token) getUser();
+}, [token, getUser]);
 
   const logout = () => {
     localStorage.removeItem("token");

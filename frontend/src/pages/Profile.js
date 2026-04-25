@@ -3,19 +3,17 @@ import { useNavigate } from "react-router-dom";
 
 function Profile({ logout, user })  {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
     const [newEmail, setNewEmail] = useState("");
     
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-  const changeEmail = () => {
-    if (!newEmail) return alert("Enter new email");
-    setEmail(newEmail);
-    setNewEmail("");
-    alert("Email updated");
-  };
+const changeEmail = () => {
+  if (!newEmail) return alert("Enter new email");
+
+  alert("Feature coming soon"); // or connect API later
+};
 
   const changePassword = () => {
     if (newPassword !== confirmPassword) {
@@ -40,7 +38,9 @@ function Profile({ logout, user })  {
       }}>
 
         <h2 style={{ marginBottom: 20 }}>👤 Profile</h2>
-
+  <p style={{ color: "#333", fontWeight: "500" }}>
+  Email: {user?.email}
+</p>
         {/* EMAIL */}
         <label>Email</label>
         <input
