@@ -1,5 +1,6 @@
 require("dotenv").config();
 console.log("NEW BACKEND DEPLOYED");
+
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
@@ -7,28 +8,27 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 
-const cors = require("cors");
+// ✅ CORS (WORKING 100%)
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
-const cors = require("cors");
+app.options("*", cors());
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+// ✅ BODY PARSER
+app.use(express.json());
 
-app.options("*", (req, res) => {
-  res.sendStatus(200);
-});
-
+// ✅ SUPABASE
 const supabase = require("./supabaseClient");
+
 
 // 🔐 AUTH MIDDLEWARE
 const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  console.log("AUTH HEADER:", authHeader); // 👈 DEBUG
+  console.log("AUTH HEADER:", authHeader);
 
   if (!authHeader) {
     return res.status(401).json({ message: "No token" });
@@ -37,11 +37,11 @@ const authenticate = (req, res, next) => {
   try {
     const token = authHeader.split(" ")[1];
 
-    console.log("TOKEN RECEIVED:", token); // 👈 DEBUG
+    console.log("TOKEN RECEIVED:", token);
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log("DECODED USER:", decoded); // 👈 DEBUG
+    console.log("DECODED USER:", decoded);
 
     req.user = decoded;
 
@@ -51,7 +51,6 @@ const authenticate = (req, res, next) => {
     return res.status(401).json({ message: "Invalid token" });
   }
 };
-
 // HOME
 app.get("/", (req, res) => res.send("Backend working"));
 
