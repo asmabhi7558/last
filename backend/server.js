@@ -9,13 +9,12 @@ const app = express();
 
 const cors = require("cors");
 
+const cors = require("cors");
+
 app.use(cors({
-  origin: [
-    "https://panel-slz7.vercel.app" // 👈 YOUR FRONTEND URL
-  ],
+  origin: "*", // 👈 TEMPORARY FIX (VERY IMPORTANT)
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.options("*", cors());
