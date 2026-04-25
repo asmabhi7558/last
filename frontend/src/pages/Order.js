@@ -40,7 +40,6 @@ useEffect(() => {
     console.log("No token found");
     return;
   }
-https://panel-y8tg.onrender.com
 fetch("https://panel-y8tg.onrender.com/me", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`
