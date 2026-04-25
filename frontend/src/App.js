@@ -32,9 +32,9 @@ function App() {
   };
 
   // LOGIN
-
-
+  
   // SIGNUP
+
   // USER
 const getUser = useCallback(async () => {
   const token = localStorage.getItem("token");
