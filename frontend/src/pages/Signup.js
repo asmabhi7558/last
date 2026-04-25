@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const API = "https://panel-y8tg.onrender.com";
 
   const [username, setUsername] = useState("");
@@ -13,101 +15,85 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (password !== confirm) {
-      return alert("Passwords do not match");
-    }
-
-    if (!terms) {
-      return alert("Please accept Terms");
-    }
+    if (password !== confirm) return alert("Passwords do not match");
+    if (!terms) return alert("Accept terms");
 
     const res = await fetch(`${API}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        email,
-        password
-      })
+      body: JSON.stringify({ email, password })
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      alert("Account created! Now login");
-      window.location.href = "/";
+      alert("Signup successful");
+      navigate("/");
     } else {
       alert(data.message || "Signup failed");
     }
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0f172a", color: "white" }}>
+    <div style={{ minHeight: "100vh", background: "#1a0f3c" }}>
       
       {/* NAVBAR */}
       <div style={{
         display: "flex",
         justifyContent: "space-between",
-        padding: "15px 30px",
-        borderBottom: "1px solid #1e293b"
+        padding: "20px 40px",
+        color: "white"
       }}>
-        <h2>SMM PANEL</h2>
+        <h2>🔥 Cheapest SMM Panels</h2>
+
         <div style={{ display: "flex", gap: 20 }}>
-          <a href="/" style={{ color: "#38bdf8" }}>Login</a>
+          <span onClick={() => navigate("/")}>Sign in</span>
           <span>Services</span>
           <span>API</span>
-          <span style={{ color: "#38bdf8" }}>Sign up</span>
+          <span style={{ color: "#00d4ff" }}>Sign up</span>
         </div>
       </div>
 
-      {/* MAIN */}
+      {/* CARD */}
       <div style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        padding: 40
+        marginTop: 40
       }}>
-
         <div style={{
-          background: "#1e293b",
+          background: "white",
           padding: 30,
-          borderRadius: 10,
-          maxWidth: 500,
-          width: "100%"
+          borderRadius: 12,
+          width: 400
         }}>
 
-          <h2 style={{ textAlign: "center", marginBottom: 20 }}>
+          <h3 style={{ textAlign: "center", marginBottom: 20 }}>
             Create Account
-          </h2>
+          </h3>
 
           <form onSubmit={handleSignup}>
 
             <input
-              type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               style={inputStyle}
-              required
             />
 
             <input
-              type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={inputStyle}
-              required
             />
 
             <input
-              type="text"
-              placeholder="WhatsApp Number"
+              placeholder="WhatsApp"
               value={whatsapp}
               onChange={(e) => setWhatsapp(e.target.value)}
               style={inputStyle}
-              required
             />
 
             <input
@@ -116,7 +102,6 @@ function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               style={inputStyle}
-              required
             />
 
             <input
@@ -125,7 +110,6 @@ function Signup() {
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
               style={inputStyle}
-              required
             />
 
             <div style={{ marginBottom: 10 }}>
@@ -134,17 +118,20 @@ function Signup() {
                 checked={terms}
                 onChange={() => setTerms(!terms)}
               />{" "}
-              I agree to Terms
+              I agree to Terms of Service
             </div>
 
-            <button style={btnStyle}>Sign Up</button>
+            <button style={btnStyle}>Sign up</button>
 
-            <div style={{ textAlign: "center", marginTop: 15 }}>
+            <p style={{ textAlign: "center", marginTop: 10 }}>
               Already have an account?{" "}
-              <span style={{ color: "#38bdf8", cursor: "pointer" }}>
-                Login
+              <span
+                onClick={() => navigate("/")}
+                style={{ color: "#007bff", cursor: "pointer" }}
+              >
+                Sign in
               </span>
-            </div>
+            </p>
 
           </form>
         </div>
@@ -155,21 +142,21 @@ function Signup() {
 
 const inputStyle = {
   width: "100%",
-  padding: 10,
-  marginBottom: 10,
-  borderRadius: 6,
-  border: "none"
+  padding: 12,
+  marginBottom: 12,
+  borderRadius: 8,
+  border: "1px solid #ccc"
 };
 
 const btnStyle = {
   width: "100%",
   padding: 12,
-  background: "#22c55e",
-  border: "none",
-  borderRadius: 6,
+  background: "#2f4b6e",
   color: "white",
-  fontWeight: "bold",
-  cursor: "pointer"
+  border: "none",
+  borderRadius: 8,
+  cursor: "pointer",
+  fontWeight: "bold"
 };
 
 export default Signup;
