@@ -191,7 +191,7 @@ function Toast({ toast }) {
           {toast.message}
         </motion.div>
       )}
-    </AnimatePresence>
+      </AnimatePresence>
   );
 }
 
