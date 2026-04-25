@@ -31,8 +31,13 @@ function Login({ setToken }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#140a3c", color: "white" }}>
-
+<div style={{
+  minHeight: "100vh",
+  width: "100%",
+  background: "#140a3c",
+  margin: 0,
+  padding: 0
+}}>
       {/* NAVBAR */}
       <div style={{
         display: "flex",
