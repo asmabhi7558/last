@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({ setToken }) {
+  const navigate = useNavigate();
+  const API = "https://panel-y8tg.onrender.com";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const API = "https://panel-y8tg.onrender.com";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,106 +24,110 @@ function Login({ setToken }) {
     if (res.ok) {
       localStorage.setItem("token", data.token);
       setToken(data.token);
+      navigate("/order");
     } else {
-      alert(data.message);
+      alert(data.message || "Login failed");
     }
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0f172a", color: "white" }}>
-      
+    <div style={{ minHeight: "100vh", background: "#140a3c", color: "white" }}>
+
       {/* NAVBAR */}
       <div style={{
         display: "flex",
         justifyContent: "space-between",
-        padding: "15px 30px",
-        borderBottom: "1px solid #1e293b"
+        padding: "20px 40px"
       }}>
-        <h2>SMM PANEL</h2>
+        <h2>🔥 Cheapest SMM Panels</h2>
+
         <div style={{ display: "flex", gap: 20 }}>
           <span>Sign in</span>
           <span>Services</span>
           <span>API</span>
-          <a href="/signup" style={{ color: "#38bdf8" }}>Sign up</a>
+          <span onClick={() => navigate("/signup")} style={{ cursor: "pointer" }}>
+            Sign up
+          </span>
         </div>
       </div>
 
-      {/* MAIN */}
+      {/* HERO TEXT */}
+      <div style={{ textAlign: "center", marginTop: 20 }}>
+        <h1>The Cheapest & Best SMM Panel For RESELLERS 🚀</h1>
+
+        <ul style={{ marginTop: 10 }}>
+          <li>Main Supplier of SMM Services</li>
+          <li>WhatsApp Support ⚡</li>
+          <li>Best price/quality</li>
+          <li>Best panel support</li>
+        </ul>
+      </div>
+
+      {/* LOGIN CARD */}
       <div style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        padding: 40
+        marginTop: 40
       }}>
+        <div style={{
+          background: "white",
+          color: "black",
+          padding: 25,
+          borderRadius: 12,
+          width: 420
+        }}>
 
-        <div style={{ maxWidth: 900, width: "100%" }}>
+          <form onSubmit={handleLogin}>
 
-          {/* TITLE */}
-          <h1 style={{ textAlign: "center", marginBottom: 20 }}>
-            Cheapest & Best SMM Panel 🚀
-          </h1>
+            <div style={{ marginBottom: 10 }}>
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={inputStyle}
+              />
+            </div>
 
-          {/* FEATURES */}
-          <ul style={{ textAlign: "center", marginBottom: 30 }}>
-            <li>Main Supplier of SMM Services</li>
-            <li>WhatsApp Support ⚡</li>
-            <li>Best Price Guarantee</li>
-            <li>Top Panel Support</li>
-          </ul>
+            <div style={{ marginBottom: 10 }}>
+              <label>Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={inputStyle}
+              />
+            </div>
 
-          {/* LOGIN CARD */}
-          <div style={{
-            background: "#1e293b",
-            padding: 30,
-            borderRadius: 10,
-            maxWidth: 500,
-            margin: "auto"
-          }}>
+            <div style={{ textAlign: "right", marginBottom: 10 }}>
+              <small>Forgot password?</small>
+            </div>
 
-            <form onSubmit={handleLogin}>
-              
-              <div style={{ marginBottom: 15 }}>
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={inputStyle}
-                  required
-                />
-              </div>
+            <button style={btnStyle}>Sign in</button>
 
-              <div style={{ marginBottom: 15 }}>
-                <label>Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  style={inputStyle}
-                  required
-                />
-              </div>
+            <p style={{ textAlign: "center", marginTop: 15 }}>
+              Don't have an account?{" "}
+              <span
+                onClick={() => navigate("/signup")}
+                style={{ color: "#007bff", cursor: "pointer" }}
+              >
+                Sign up
+              </span>
+            </p>
 
-              <div style={{ textAlign: "right", marginBottom: 10 }}>
-                <small style={{ cursor: "pointer" }}>
-                  Forgot password?
-                </small>
-              </div>
-
-              <button style={btnStyle}>Sign In</button>
-
-              <div style={{ marginTop: 15, textAlign: "center" }}>
-                <p>Don't have an account?</p>
-                <span style={{ color: "#38bdf8", cursor: "pointer" }}>
-                  Sign up
-                </span>
-              </div>
-
-            </form>
-
-          </div>
+          </form>
         </div>
       </div>
+
+      {/* FOOTER TEXT */}
+      <div style={{ textAlign: "center", marginTop: 60 }}>
+        <h2>Best Indian SMM Followers Panel</h2>
+        <p style={{ maxWidth: 600, margin: "auto" }}>
+          SMM (Social Media Marketing) helps boost your online presence across
+          Instagram, Facebook, Twitter, YouTube at the cheapest prices.
+        </p>
+      </div>
+
     </div>
   );
 }
@@ -129,20 +135,20 @@ function Login({ setToken }) {
 const inputStyle = {
   width: "100%",
   padding: 10,
-  borderRadius: 6,
-  border: "none",
+  borderRadius: 8,
+  border: "1px solid #ccc",
   marginTop: 5
 };
 
 const btnStyle = {
   width: "100%",
   padding: 12,
-  background: "#3b82f6",
-  border: "none",
-  borderRadius: 6,
+  background: "#2f4b6e",
   color: "white",
-  fontWeight: "bold",
-  cursor: "pointer"
+  border: "none",
+  borderRadius: 8,
+  cursor: "pointer",
+  fontWeight: "bold"
 };
 
 export default Login;
