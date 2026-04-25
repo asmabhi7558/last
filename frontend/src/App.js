@@ -35,7 +35,7 @@ function App() {
   // LOGIN
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("https://panel-y8tg.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -59,7 +59,7 @@ function App() {
   // SIGNUP
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch("https://panel-y8tg.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })

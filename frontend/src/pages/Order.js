@@ -40,8 +40,8 @@ useEffect(() => {
     console.log("No token found");
     return;
   }
-
-fetch("http://localhost:5000/me", {
+https://panel-y8tg.onrender.com
+fetch("https://panel-y8tg.onrender.com/me", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`
     
@@ -72,7 +72,7 @@ fetch("http://localhost:5000/me", {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/order", {
+      const res = await fetch("https://panel-y8tg.onrender.com/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

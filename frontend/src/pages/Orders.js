@@ -4,7 +4,7 @@ function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/my-orders", {
+    fetch("https://panel-y8tg.onrender.com/my-orders", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
