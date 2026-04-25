@@ -1,24 +1,16 @@
 require("dotenv").config();
-console.log("NEW BACKEND DEPLOYED");
 
 const express = require("express");
-const cors = require("cors");
+const cors = require("cors"); // ✅ ONLY ONCE
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const app = express();
 
-// ✅ CORS (WORKING 100%)
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
-app.options("*", cors());
-
-// ✅ BODY PARSER
+app.use(cors());
 app.use(express.json());
+
+console.log("NEW BACKEND DEPLOYED");
 
 // ✅ SUPABASE
 const supabase = require("./supabaseClient");
