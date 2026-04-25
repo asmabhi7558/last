@@ -88,7 +88,7 @@ const getUser = useCallback(async () => {
   if (!token) return;
 
   try {
-    const res = await fetch("https://your-backend.onrender.com/me", {
+    const res = await fetch(`${API}/me`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
