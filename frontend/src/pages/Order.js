@@ -40,7 +40,7 @@ useEffect(() => {
     console.log("No token found");
     return;
   }
-fetch("https://panel-y8tg.onrender.com/me", {
+fetch("https://last-zbl8.onrender.com/me", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`
     
@@ -71,7 +71,7 @@ fetch("https://panel-y8tg.onrender.com/me", {
     }
 
     try {
-      const res = await fetch("https://panel-y8tg.onrender.com/order", {
+      const res = await fetch("https://last-zbl8.onrender.com/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

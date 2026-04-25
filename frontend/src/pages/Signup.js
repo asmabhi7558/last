@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
-  const API = "https://panel-y8tg.onrender.com";
+  const API = "https://last-zbl8.onrender.com";
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
