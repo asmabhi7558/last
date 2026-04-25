@@ -178,15 +178,15 @@ function Toast({ toast }) {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          style={{
-            position: "fixed",
-            top: 20,
-            right: 20,
-            background: toast.type === "error" ? "#ff4757" : "#2ed573",
-            color: "white",
-            padding: 15,
-            borderRadius: 8
-          }}
+  style={{
+  position: "fixed",
+  top: 20,
+  right: 20,
+  background: toast.type === "error" ? "#ff4757" : "#2ed573",
+  color: "white",
+  padding: 15,
+  borderRadius: 8
+}}
         >
           {toast.message}
         </motion.div>
