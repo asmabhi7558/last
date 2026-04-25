@@ -282,25 +282,14 @@ useEffect(() => {
 
         {/* MAIN */}
         <div style={{ flex: 1, padding: 20 }}>
-<Routes>
-  {!token ? (
-    <>
-      {/* NOT LOGGED IN */}
-      <Route path="*" element={<Login setToken={setToken} />} />
-    </>
-  ) : (
-    <>
-      {/* LOGGED IN */}
-      <Route path="/" element={<Order getUser={getUser} />} />
-      <Route path="/order" element={<Order getUser={getUser} />} />
-      <Route path="/profile" element={<Profile logout={logout} user={user} />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/orders" element={<Orders />} />
-      <Route path="/addfunds" element={<AddFunds />} />
-      <Route path="*" element={<Order getUser={getUser} />} />
-    </>
-  )}
-</Routes>
+          <Routes>
+          <Route path="/" element={<Order getUser={getUser} />} />
+            <Route path="/profile" element={<Profile logout={logout} user={user} />} />
+            <Route path="/order" element={<Order getUser={getUser} />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/addfunds" element={<AddFunds />} />
+          </Routes>
         </div>
 
       </div>
