@@ -34,26 +34,27 @@ function App() {
 
   // LOGIN
   const handleLogin = async () => {
-    try {
-      const res = await fetch("https://panel-y8tg.onrender.com/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
+try {
+  const res = await fetch(`${API}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
 
-      const data = await res.json();
+  const data = await res.json();
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token);
-        showToast("Login successful", "success");
-        navigate("/order");
-      } else {
-        showToast(data.message || "Login failed", "error");
-      }
-    } catch {
-      showToast("Server not reachable", "error");
-    }
+  if (!res.ok) {
+    showToast(data.message || "Login failed", "error");
+    return;
+  }
+
+  localStorage.setItem("token", data.token);
+  navigate("/order");
+
+} catch (err) {
+  console.error("FETCH ERROR:", err);
+  showToast("Network error", "error");
+}
   };
 
   // SIGNUP
