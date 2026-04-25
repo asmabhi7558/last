@@ -11,9 +11,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 function App() {
-  const [isSignup, setIsSignup] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -35,53 +32,8 @@ function App() {
   };
 
   // LOGIN
-  const handleLogin = async () => {
-try {
-  const res = await fetch(`${API}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    showToast(data.message || "Login failed", "error");
-    return;
-  }
-localStorage.setItem("token", data.token);
-setToken(data.token); // 🔥 IMPORTANT
-navigate("/order");
-
-} catch (err) {
-  console.error("FETCH ERROR:", err);
-  showToast("Network error", "error");
-}
-  };
 
   // SIGNUP
-  const handleSignup = async () => {
-    try {
-      const res = await fetch("https://panel-y8tg.onrender.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
-
-      const data = await res.json();
-
-      if (data.code === "23505") {
-        showToast("Account already exists", "error");
-        setIsSignup(false);
-        return;
-      }
-
-     await handleLogin();
-    } catch {
-      showToast("Signup error", "error");
-    }
-  };
-
   // USER
 const getUser = useCallback(async () => {
   const token = localStorage.getItem("token");
