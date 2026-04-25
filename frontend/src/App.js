@@ -82,7 +82,7 @@ useEffect(() => {
   return (
     <>
 
-{/* ☰ BUTTON */}
+{/* ☰  BUTTON */}
 <div
   onClick={() => setShowSidebar(false)}
   style={{
