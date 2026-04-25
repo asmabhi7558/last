@@ -7,6 +7,8 @@ import Order from "./pages/Order";
 import Services from "./pages/Services";
 import Orders from "./pages/Orders";
 import AddFunds from "./pages/AddFunds";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   const [isSignup, setIsSignup] = useState(false);
@@ -282,14 +284,25 @@ useEffect(() => {
 
         {/* MAIN */}
         <div style={{ flex: 1, padding: 20 }}>
-          <Routes>
-          <Route path="/" element={<Order getUser={getUser} />} />
-            <Route path="/profile" element={<Profile logout={logout} user={user} />} />
-            <Route path="/order" element={<Order getUser={getUser} />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/addfunds" element={<AddFunds />} />
-          </Routes>
+<Routes>
+  {!token ? (
+    <>
+      <Route path="/" element={<Login setToken={setToken} />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="*" element={<Login setToken={setToken} />} />
+    </>
+  ) : (
+    <>
+      <Route path="/" element={<Order getUser={getUser} />} />
+      <Route path="/order" element={<Order getUser={getUser} />} />
+      <Route path="/profile" element={<Profile logout={logout} user={user} />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/addfunds" element={<AddFunds />} />
+      <Route path="*" element={<Order getUser={getUser} />} />
+    </>
+  )}
+</Routes>
         </div>
 
       </div>
