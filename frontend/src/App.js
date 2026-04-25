@@ -17,6 +17,8 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const API = "https://panel-y8tg.onrender.com"; // ✅ ADD THIS
+
   const [toast, setToast] = useState({
     show: false,
     message: "",
