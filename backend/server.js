@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+console.log("NEW BACKEND DEPLOYED");
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
@@ -11,13 +11,16 @@ const cors = require("cors");
 
 const cors = require("cors");
 
-app.use(cors({
-  origin: "*", // 👈 TEMPORARY FIX (VERY IMPORTANT)
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
 
-app.options("*", cors());
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
 
 const supabase = require("./supabaseClient");
 
