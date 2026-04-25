@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Landing from "./Landing";
 import { useNavigate, Routes, Route } from "react-router-dom";
-
+import { useCallback } from "react";
 import Profile from "./pages/Profile";
 import Order from "./pages/Order";
 import Services from "./pages/Services";
@@ -80,27 +80,33 @@ function App() {
   };
 
   // USER
-  const getUser = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/me", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-  
-      if (!res.ok) {
-        console.log("Token invalid OR request failed");
-        return; // ❌ REMOVE logout()
+const getUser = useCallback(async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  try {
+    const res = await fetch("https://your-backend.onrender.com/me", {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-  
-      const data = await res.json();
-      console.log("USER DATA:", data);
-      setUser(data);
-  
-    } catch (err) {
-      console.error("Error fetching user:", err);
+    });
+
+    // ✅ check before parsing JSON
+    if (!res.ok) {
+      console.log("API error:", res.status);
+      return;
     }
-  };
+
+    const data = await res.json();
+
+    console.log("USER DATA:", data);
+
+    setUser(data.user || data);
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+}, []);
 useEffect(() => {
   if (token) getUser();
 }, [token, getUser]);
