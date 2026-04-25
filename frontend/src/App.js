@@ -31,8 +31,6 @@ function App() {
     }, 3000);
   };
 
-  // LOGIN
-  
   // SIGNUP
 
   // USER
