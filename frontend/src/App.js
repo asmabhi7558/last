@@ -49,9 +49,9 @@ try {
     showToast(data.message || "Login failed", "error");
     return;
   }
-
-  localStorage.setItem("token", data.token);
-  navigate("/order");
+localStorage.setItem("token", data.token);
+setToken(data.token); // 🔥 IMPORTANT
+navigate("/order");
 
 } catch (err) {
   console.error("FETCH ERROR:", err);
@@ -114,6 +114,10 @@ useEffect(() => {
   if (token) getUser();
 }, [token, getUser]);
 
+useEffect(() => {
+  const savedToken = localStorage.getItem("token");
+  if (savedToken) setToken(savedToken);
+}, []);
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
