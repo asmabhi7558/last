@@ -7,7 +7,14 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://panel-slz7.vercel.app" // 👈 your frontend URL
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 app.use(express.json());
 
 const supabase = require("./supabaseClient");
