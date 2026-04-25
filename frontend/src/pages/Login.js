@@ -33,10 +33,10 @@ function Login({ setToken }) {
   return (
 <div style={{
   minHeight: "100vh",
-  width: "100%",
+  width: "100vw",
   background: "#140a3c",
-  margin: 0,
-  padding: 0
+  display: "flex",
+  flexDirection: "column"
 }}>
       {/* NAVBAR */}
       <div style={{
@@ -127,7 +127,6 @@ function Login({ setToken }) {
       {/* FOOTER TEXT */}
       <div style={{ textAlign: "center", marginTop: 60 }}>
         <h2>Best Indian SMM Followers Panel</h2>
-        <p style={{ maxWidth: 600, margin: "auto" }}>
           SMM (Social Media Marketing) helps boost your online presence across
           Instagram, Facebook, Twitter, YouTube at the cheapest prices.
         </p>

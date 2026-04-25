@@ -112,7 +112,15 @@ useEffect(() => {
     ☰
   </div>
   
-      <div style={{ display: "flex" }}>
+<>
+  <div style={{
+    display: "flex",
+    minHeight: "100vh",
+    width: "100vw",
+    margin: 0,
+    padding: 0,
+    background: "#140a3c"
+  }}>
 
         {/* SIDEBAR */}
         {showSidebar && (
