@@ -112,8 +112,8 @@ function Login({ setToken }) {
 
               <div style={{ marginTop: 15, textAlign: "center" }}>
                 <p>Don't have an account?</p>
-                <span style={{ color: "#38bdf8", cursor: "pointer" }}>
-                  Sign up
+    <a href="/signup" style={{ color: "#38bdf8" }}>Sign up</a>
+        </div>
                 </span>
               </div>
 
